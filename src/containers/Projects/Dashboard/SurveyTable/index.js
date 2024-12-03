@@ -1,5 +1,5 @@
 import {useCallback, useState, useMemo} from 'react';
-import {useNavigate, useParams} from 'react-router-dom';
+import {useNavigate, useParams} from 'react-router';
 import {useSelector, useDispatch} from 'react-redux';
 import {BsPlus, BsArrowRight} from 'react-icons/bs';
 
@@ -88,8 +88,8 @@ export const DataItem = ({item, column, clonable}) => {
 
     const stopEventBubbling = useCallback(e => e.stopPropagation(), []);
 
-    const hasEditAccess = useMemo(() => 
-        checkEditAccess(activeProject?.accessLevel), 
+    const hasEditAccess = useMemo(() =>
+        checkEditAccess(activeProject?.accessLevel),
     [activeProject]);
 
     if(column.Header===_('Name')) {
@@ -105,14 +105,14 @@ export const DataItem = ({item, column, clonable}) => {
         }
         return (
             <div onClick={stopEventBubbling}>
-                <OptionsDropdown 
-                    onClone={handleShowDeleteDraftModal} 
-                    onDelete={handleShowDeleteSurveyModal} 
+                <OptionsDropdown
+                    onClone={handleShowDeleteDraftModal}
+                    onDelete={handleShowDeleteSurveyModal}
                 />
-                <TakeSurveyModal 
+                <TakeSurveyModal
                     clone
-                    isVisible={showSurveyModal} 
-                    onClose={hideSurveyModal} 
+                    isVisible={showSurveyModal}
+                    onClose={hideSurveyModal}
                 />
                 <DeleteSurveyModal
                     surveyId={item.id}
@@ -137,7 +137,7 @@ const SurveyTable = ({onTakeSurveyClick, clonable}) => {
         {
             Header: _('Name'),
             accessor: 'title',
-        }, 
+        },
         {
             Header: _('Created on'),
             accessor: 'createdAt',
@@ -156,8 +156,8 @@ const SurveyTable = ({onTakeSurveyClick, clonable}) => {
     const surveys = useSelector(getFormattedSurveys);
     const surveyData = useMemo(() => surveys.filter(el => el.project === +projectId), [surveys, projectId]);
 
-    const hasEditAccess = useMemo(() => 
-        checkEditAccess(activeProject?.accessLevel), 
+    const hasEditAccess = useMemo(() =>
+        checkEditAccess(activeProject?.accessLevel),
     [activeProject]);
 
     const handleMoreClick = useCallback(() => navigate('surveys/'), [navigate]);
@@ -174,9 +174,9 @@ const SurveyTable = ({onTakeSurveyClick, clonable}) => {
             <div className={styles.surveyHeader}>
                 <h3 className={styles.surveyTitle}><Localize>Surveys</Localize></h3>
                 {hasEditAccess && (
-                    <Button 
-                        outline 
-                        onClick={onTakeSurveyClick} 
+                    <Button
+                        outline
+                        onClick={onTakeSurveyClick}
                         className={styles.button}
                     >
                         <BsPlus size={20} className={styles.buttonIcon} /> <Localize>Take Survey</Localize>
@@ -187,11 +187,11 @@ const SurveyTable = ({onTakeSurveyClick, clonable}) => {
                 <Localize text="1 survey" textPlural="{{ count }} surveys" count={surveyData.length} />
             </p>
             <div className={styles.surveyTable}>
-                <Table 
+                <Table
                     loading={!activeProject || (activeProject.surveysCount > 0 && !surveyData.length)}
                     LoadingComponent={<NeatLoader medium />}
-                    className={styles.table} 
-                    data={surveyData} 
+                    className={styles.table}
+                    data={surveyData}
                     columns={surveyColumns}
                     maxRows={10}
                     renderHeaderItem={HeaderItem}
@@ -201,12 +201,12 @@ const SurveyTable = ({onTakeSurveyClick, clonable}) => {
                     bodyClassName={styles.tableBody}
                     bodyRowClassName={styles.bodyRow}
                     onRowClick={handleSurveyClick}
-                /> 
+                />
             </div>
             <Button className={styles.buttonBottom} secondary outline onClick={handleMoreClick}>
                 <Localize>More Details</Localize> <BsArrowRight size={20} className={styles.buttonBottomIcon} />
             </Button>
-        </div> 
+        </div>
     );
 };
 

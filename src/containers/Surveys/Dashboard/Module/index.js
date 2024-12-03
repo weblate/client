@@ -1,5 +1,5 @@
 import {useCallback, useEffect, useState, useMemo} from 'react';
-import {useSearchParams} from 'react-router-dom';
+import {useSearchParams} from 'react-router';
 import {useSelector, useDispatch} from 'react-redux';
 import SVG from 'react-inlinesvg';
 import {BsPlus} from 'react-icons/bs';
@@ -76,9 +76,9 @@ const FillQuestionnaire = props => {
                     <Localize>Please complete the questionnaire to view this analysis.</Localize>
                 )}
             </p>
-            <Button 
-                outline 
-                onClick={hasResults ? handleShowQuestionnaire : surveyModalsConfig.handleShowDeleteDraft} 
+            <Button
+                outline
+                onClick={hasResults ? handleShowQuestionnaire : surveyModalsConfig.handleShowDeleteDraft}
                 className={styles.button}
             >
                 {!hasResults && <BsPlus className={styles.buttonIcon} />}
@@ -116,7 +116,7 @@ const Module = props => {
     const [expanded, setExpanded] = useState(false);
 
     const [searchParams, setSearchParams] = useSearchParams();
-    
+
     const {topics, statements} = useSelector(state => state.statement);
     const {isEditMode} = useSelector(state => state.dashboard);
     const {activeSurvey} = useSelector(state => state.survey);
@@ -140,22 +140,22 @@ const Module = props => {
             <div className={cs(styles.headerItem, {
                 [styles.headerItemActive]: active && !isEditMode,
             })} {...rest}>
-                <Editable 
-                    type="topic" 
+                <Editable
+                    type="topic"
                     accessor="code"
                     module={code}
                     identifier={tabHeaderProps.label}
                 >
                     <div className={styles.headerTitle}>
-                        <SVG 
+                        <SVG
                             className={styles.tabIcon}
                             src={iconSrc || topicIconPlaceholder}
-                            width={20} 
+                            width={20}
                             title={title}
                         >
                             <SVG
                                 className={styles.tabIcon}
-                                width={20} 
+                                width={20}
                                 src={topicIconPlaceholder}
                                 title={title}
                             />
@@ -249,7 +249,7 @@ const Module = props => {
                 title={topic.title}
                 className={styles.tabContent}
             >
-                <StatementsContent 
+                <StatementsContent
                     toggleExpand={toggleExpand}
                     expanded={expanded}
                     statementData={topic.statementData}
@@ -276,7 +276,7 @@ const Module = props => {
     }
     if(!AVAILABLE_SURVEY_MODULES.includes(code)) {
         return <UnderDevelopment />;
-    }  
+    }
     if(!doModuleResultsExist) {
         return <FillQuestionnaire activeSurvey={activeSurvey} moduleCode={code} />;
     }

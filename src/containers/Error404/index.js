@@ -1,4 +1,4 @@
-import {Link} from 'react-router-dom';
+import {Link} from 'react-router';
 import {HiArrowNarrowLeft} from 'react-icons/hi';
 
 import NavBar from 'components/NavBar';
@@ -14,7 +14,7 @@ const Error404 = () => {
         <div className={styles.container}>
             <NavBar dark />
             <section className={styles.section}>
-                <img src={image} alt="404" />  
+                <img src={image} alt="404" />
                 <h3 className={styles.sectionTitle}><Localize>Page not found!</Localize></h3>
                 <Link to="/">
                     <Button className={styles.button}>

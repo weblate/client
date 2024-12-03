@@ -1,5 +1,5 @@
 import React, {useCallback, useEffect, useMemo} from 'react';
-import {useParams, useNavigate, Link, useSearchParams} from 'react-router-dom';
+import {useParams, useNavigate, Link, useSearchParams} from 'react-router';
 import {useDispatch, useSelector} from 'react-redux';
 
 import Button from 'components/Button';
@@ -20,13 +20,13 @@ import styles from './styles.scss';
 const PublicSurvey = () => {
     const navigate = useNavigate();
     const {identifier} = useParams();
-    
+
     const dispatch = useDispatch();
 
     const [{loading}, getPublicSurvey] = usePromise(Api.getPublicSurvey);
 
     const {isAuthenticated} = useSelector(state => state.auth);
-    const {questions, status: questionsStatus} = useSelector(state => state.question); 
+    const {questions, status: questionsStatus} = useSelector(state => state.question);
     const {statements} = useSelector(state => state.statement);
     const {activeSurvey} = useSelector(state => state.survey);
 
@@ -93,14 +93,14 @@ const PublicSurvey = () => {
             console.log(error);
         }
     }, [
-        identifier, 
-        getPublicSurvey, 
-        dispatch, 
-        allQuestions, 
-        statements, 
-        navigate, 
+        identifier,
+        getPublicSurvey,
+        dispatch,
+        allQuestions,
+        statements,
+        navigate,
         isDataReady,
-    ]); 
+    ]);
 
     useEffect(() => {
         getSurvey();
@@ -116,12 +116,12 @@ const PublicSurvey = () => {
                 <div className={styles.logoContainer}>
                     <Link to='/'>
                         <img className={styles.logo} src={logo} alt={_('Neat+ Logo')} />
-                    </Link> 
+                    </Link>
                 </div>
                 <h1 className={styles.title}>{activeSurvey?.title}</h1>
                 <div className={styles.buttonContainer}>
                     <Button outline className={styles.button} onClick={handleNavButtonClick}>
-                        {isAuthenticated ? _('Go to Projects') : _('Login')} 
+                        {isAuthenticated ? _('Go to Projects') : _('Login')}
                     </Button>
                 </div>
                 <div className={styles.spacer} />
@@ -132,7 +132,7 @@ const PublicSurvey = () => {
                 <div className={styles.tabsContainer}>
                     <SurveyTabs
                         publicMode
-                        activeTab={activeTab} 
+                        activeTab={activeTab}
                         onTabChange={handleTabChange}
                     />
                 </div>

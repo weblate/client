@@ -1,5 +1,5 @@
 import {useCallback, useMemo} from 'react';
-import {Link, useLocation, useParams, useNavigate} from 'react-router-dom';
+import {Link, useLocation, useParams, useNavigate} from 'react-router';
 
 import {useSelector} from 'react-redux';
 import {BiChevronLeft} from 'react-icons/bi';
@@ -40,7 +40,7 @@ const ProjectDashboard = withNoSurvey(() => {
     }, [surveys, projectId]);
 
     const projectLocations = useMemo(() => {
-        return projectSurveys.flatMap(sur => 
+        return projectSurveys.flatMap(sur =>
             sur.answers.filter(el => el.question.code === 'coords')
                 .map(ans => ans.formattedAnswer)
         );
@@ -53,15 +53,15 @@ const ProjectDashboard = withNoSurvey(() => {
     const concernsData = useMemo(() => {
         return topics.map(topic => {
             const topicResults = projectResults.filter(res => res.topic === topic.id);
-            const highCount = topicResults.filter(res => 
+            const highCount = topicResults.filter(res =>
                 res.severity === _('High')
             ).length;
-            const mediumCount = topicResults.filter(res => 
+            const mediumCount = topicResults.filter(res =>
                 res.severity === _('Medium')
             ).length;
-            const lowCount = topicResults.filter(res => 
+            const lowCount = topicResults.filter(res =>
                 res.severity === _('Low')
-            ).length; 
+            ).length;
             const totalCount = highCount + mediumCount + lowCount;
             return {
                 icon: topic.icon,
@@ -74,10 +74,10 @@ const ProjectDashboard = withNoSurvey(() => {
         });
     }, [topics, projectResults]);
 
-    const topConcerns = useMemo(() => 
+    const topConcerns = useMemo(() =>
         concernsData?.sort((a, b) => {
             return (b.highCount - a.highCount) || (b.mediumCount - a.mediumCount) || (b.lowCount - a.lowCount);
-        })?.slice(0, 4), 
+        })?.slice(0, 4),
     [concernsData]);
 
     const handleTabChange = useCallback(({activeTab}) => {
@@ -92,9 +92,9 @@ const ProjectDashboard = withNoSurvey(() => {
             <Link to="/projects" className={styles.backLink}>
                 <BiChevronLeft size={22} className={styles.backIcon} /> <Localize>Back to Projects</Localize>
             </Link>
-            <Tabs 
+            <Tabs
                 activeTab={location.pathname.includes('surveys') ? 'surveys' : 'summary'}
-                secondary 
+                secondary
                 className={styles.tabs}
                 headerClassName={styles.tabsHeader}
                 onChange={handleTabChange}
@@ -115,7 +115,7 @@ const ProjectDashboard = withNoSurvey(() => {
                                         <Localize>Top concerns topics</Localize>
                                     </h4>
                                     <div className={styles.concernsTable}>
-                                        <ConcernsTable 
+                                        <ConcernsTable
                                             loading={!projectResults.length}
                                             concerns={topConcerns}
                                         />
@@ -129,10 +129,10 @@ const ProjectDashboard = withNoSurvey(() => {
                                         <Localize>Number of issues of concern by location</Localize>
                                     </h4>
                                     <div className={styles.map}>
-                                        <Map 
-                                            project={activeProject} 
-                                            features={projectLocations} 
-                                            showPopup 
+                                        <Map
+                                            project={activeProject}
+                                            features={projectLocations}
+                                            showPopup
                                             width={400}
                                             height={500}
                                         />

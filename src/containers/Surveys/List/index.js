@@ -1,5 +1,5 @@
 import {useState, useCallback, useMemo} from 'react';
-import {useParams, useNavigate} from 'react-router-dom';
+import {useParams, useNavigate} from 'react-router';
 import {useSelector, useDispatch} from 'react-redux';
 
 import {NeatLoader} from 'components/Loader';
@@ -56,7 +56,7 @@ export const DataItem = ({item, column, onClone, onDelete}) => {
     const {activeProject} = useSelector(state => state.project);
     const {projectId: draftId, title, moduleCode, draftAnswers} = useSelector(state => state.draft);
     const {questions} = useSelector(state => state.question);
-    
+
     const doesDraftExist = useMemo(() => draftId && title, [draftId, title]);
     const itemAnswers = useMemo(() => item.answers.map(sur => (
         {...sur, question: sur.question.id}
@@ -64,8 +64,8 @@ export const DataItem = ({item, column, onClone, onDelete}) => {
 
     const stopEventBubbling = useCallback(e => e.stopPropagation(), []);
 
-    const hasEditAccess = useMemo(() => 
-        checkEditAccess(activeProject?.accessLevel), 
+    const hasEditAccess = useMemo(() =>
+        checkEditAccess(activeProject?.accessLevel),
     [activeProject]);
 
     const [showSurveyModal, setShowSurveyModal] = useState(false);
@@ -135,15 +135,15 @@ export const DataItem = ({item, column, onClone, onDelete}) => {
         }
         return (
             <div onClick={stopEventBubbling}>
-                <OptionsDropdown 
-                    className={styles.optionsItem} 
-                    onClone={handleShowDeleteDraftModal} 
-                    onDelete={handleShowDeleteSurveyModal} 
+                <OptionsDropdown
+                    className={styles.optionsItem}
+                    onClone={handleShowDeleteDraftModal}
+                    onDelete={handleShowDeleteSurveyModal}
                 />
-                <TakeSurveyModal 
+                <TakeSurveyModal
                     clone
-                    isVisible={showSurveyModal} 
-                    onClose={hideSurveyModal} 
+                    isVisible={showSurveyModal}
+                    onClose={hideSurveyModal}
                 />
                 <DeleteSurveyModal
                     surveyId={item.id}
@@ -169,7 +169,7 @@ const SurveyList = () => {
         {
             Header: _('Name'),
             accessor: 'title',
-        }, 
+        },
         {
             Header: _('Location'),
             accessor: 'location',
@@ -213,15 +213,15 @@ const SurveyList = () => {
 
     return (
         <div className={styles.container}>
-            <Table 
-                className={styles.table} 
-                data={surveyData} 
-                columns={columns} 
+            <Table
+                className={styles.table}
+                data={surveyData}
+                columns={columns}
                 maxRows={maxRows.value}
                 loading={!surveyData?.length}
                 LoadingComponent={<NeatLoader medium />}
                 page={page}
-                renderHeaderItem={HeaderItem} 
+                renderHeaderItem={HeaderItem}
                 renderDataItem={DataItem}
                 headerClassName={styles.tableHeader}
                 headerRowClassName={styles.headerRow}
@@ -231,13 +231,13 @@ const SurveyList = () => {
             />
             <div className={styles.contentFooter}>
                 <div className={styles.maxRowsSelect}>
-                    <Localize>Show</Localize> 
-                    <SelectInput 
+                    <Localize>Show</Localize>
+                    <SelectInput
                         className={styles.select}
                         controlClassName={styles.selectControl}
-                        options={maxRowsOptions} 
-                        keyExtractor={keyExtractor} 
-                        valueExtractor={labelExtractor} 
+                        options={maxRowsOptions}
+                        keyExtractor={keyExtractor}
+                        valueExtractor={labelExtractor}
                         onChange={handleMaxRowsChange}
                         defaultValue={maxRowsOptions[0]}
                         clearable={false}
@@ -246,14 +246,14 @@ const SurveyList = () => {
                     />
                     <Localize>Rows</Localize>
                 </div>
-                <Pagination 
+                <Pagination
                     className={styles.pagination}
                     pageItemClassName={styles.paginationItem}
                     activePageItemClassName={styles.paginationItemActive}
-                    onChange={handlePageChange} 
+                    onChange={handlePageChange}
                     totalRecords={surveyData.length}
                     pageNeighbours={1}
-                    pageLimit={maxRows.value} 
+                    pageLimit={maxRows.value}
                     pageNum={page}
                 />
             </div>

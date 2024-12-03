@@ -1,5 +1,5 @@
 import React, {useEffect, useMemo, useState, useCallback} from 'react';
-import {useLocation, useParams, useNavigate, Link, useOutletContext} from 'react-router-dom';
+import {useLocation, useParams, useNavigate, Link, useOutletContext} from 'react-router';
 import {useSelector, useDispatch} from 'react-redux';
 import {
     BiChevronLeft,
@@ -74,7 +74,7 @@ const StatementWeightage = props => {
     const [{result, loading: loadingBaselineFeedbacks}, loadFeedbacks] = usePromise(Api.getFeedbacks);
 
     const [{loading: baselineSubmitting}, submitBaselineFeedbacks] = usePromise(Api.addBaselineFeedback);
-    
+
     const [runningFunctionCode, setRunningFunctionCode] = useState('');
     const [functionCode, setFunctionCode] = useState(initialFunctionCode);
     const handleFunctionChange = useCallback(e => {
@@ -359,12 +359,12 @@ const StatementWeightage = props => {
         <div className={styles.container}>
             <div className={styles.content}>
                 <div className={styles.contentHeader}>
-                    <Link 
-                        to={`/administration/statements/${statementId}/`} 
+                    <Link
+                        to={`/administration/statements/${statementId}/`}
                         className={styles.backLink}
                     >
-                        <BiChevronLeft 
-                            size={22} 
+                        <BiChevronLeft
+                            size={22}
                             className={styles.backIcon}
                         />
                     </Link>
@@ -389,10 +389,10 @@ const StatementWeightage = props => {
                     >
                         <Localize>Save</Localize>
                     </Button>
-                </div> 
+                </div>
                 <div className={styles.contentBody}>
                     <div className={styles.weightageSection}>
-                        <Tabs 
+                        <Tabs
                             activeTab={activeTab}
                             primary
                             className={styles.tabs}

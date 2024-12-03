@@ -1,5 +1,5 @@
 import {useCallback, useMemo, useEffect} from 'react';
-import {useNavigate, useLocation, useParams} from 'react-router-dom';
+import {useNavigate, useLocation, useParams} from 'react-router';
 import {useSelector, useDispatch} from 'react-redux';
 import SVG from 'react-inlinesvg';
 import {BiChevronLeft} from 'react-icons/bi';
@@ -43,10 +43,10 @@ const TopicItem  = ({item, activeModule, isBaselineFeedback}) => {
     return (
         <div className={styles.topicItem}>
             <div className={styles.topicHeader}>
-                <SVG 
+                <SVG
                     className={styles.topicIcon}
                     src={item.icon ?? topicIconPlaceholder}
-                    width={20} 
+                    width={20}
                     title={item.title}
                 >
                     <SVG className={styles.topicIcon} width={20} src={topicIconPlaceholder} title={item.title} />
@@ -152,8 +152,8 @@ const SurveyFeedback = props => {
             <div className={styles.header}>
                 <div className={styles.titleContainer}>
                     <div className={styles.backLink} onClick={handleGoBack}>
-                        <BiChevronLeft 
-                            size={22} 
+                        <BiChevronLeft
+                            size={22}
                             className={styles.backIcon}
                         />
                     </div>

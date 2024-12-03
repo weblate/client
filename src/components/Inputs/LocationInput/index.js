@@ -111,7 +111,7 @@ const LocationInput = props => {
     }, [onChange]);
 
     const handleLocationPick = useCallback(lngLat => {
-        const [lng, lat] = lngLat;
+        const {lng, lat} = lngLat;
         const pointValue = getPointField({
             longitude: lng.toFixed(5),
             latitude: lat.toFixed(5),

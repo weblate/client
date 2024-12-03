@@ -1,6 +1,7 @@
 const pinStyle = {
     cursor: 'pointer',
     stroke: 'none',
+    position: 'absolute'
 };
 
 const SurveyMarker = ({title}) => {

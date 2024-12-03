@@ -1,5 +1,5 @@
 import {useState, useCallback, useEffect} from 'react';
-import {Outlet} from 'react-router-dom';
+import {Outlet} from 'react-router';
 import {useSelector} from 'react-redux';
 import {AiOutlineFileText} from 'react-icons/ai';
 

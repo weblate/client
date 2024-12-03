@@ -1,5 +1,5 @@
 import {useCallback, useState, useMemo, useRef, useEffect} from 'react';
-import {useParams} from 'react-router-dom';
+import {useParams} from 'react-router';
 import {useSelector, useDispatch} from 'react-redux';
 
 import {MdClose} from 'react-icons/md';
@@ -67,7 +67,7 @@ const QuestionGroupItem = props => {
             {item.title}
         </p>
     );
-}; 
+};
 
 const GroupContent = props => {
     const {answers} = useSelector(state => state.question);
@@ -101,11 +101,11 @@ const GroupContent = props => {
 
     const renderQuestion = useCallback(listProps => {
         return (
-            <Question 
+            <Question
                 ref={el => questionsRef.current[listProps.index] = el}
-                editable={editable} 
-                showRequired={showRequired} 
-                {...listProps} 
+                editable={editable}
+                showRequired={showRequired}
+                {...listProps}
             />
         );
     }, [showRequired, editable]);
@@ -118,13 +118,13 @@ const GroupContent = props => {
                 data={questions}
                 renderItem={renderQuestion}
                 keyExtractor={keyExtractor}
-                
+
             />
             <div className={styles.buttons}>
                 {showPrevious && (
                     <Button
-                        secondary 
-                        className={styles.button} 
+                        secondary
+                        className={styles.button}
                         onClick={onPreviousClick}
                     >
                         <BsArrowLeft size={22} className={styles.buttonIconLeft} />
@@ -132,8 +132,8 @@ const GroupContent = props => {
                     </Button>
                 )}
                 {showNext && (
-                    <Button 
-                        className={cs(styles.button, styles.buttonNext)} 
+                    <Button
+                        className={cs(styles.button, styles.buttonNext)}
                         onClick={handleNextClick}
                     >
                         <Localize>Next</Localize>
@@ -141,7 +141,7 @@ const GroupContent = props => {
                     </Button>
                 )}
             </div>
-        </> 
+        </>
     );
 };
 
@@ -152,7 +152,7 @@ const TakeSurveyModal = (props) => {
     const {activeSurvey} = useSelector(state => state.survey);
     const {modules = []} = useSelector(state => state.context);
     const {
-        title: surveyTitle, 
+        title: surveyTitle,
         projectId: draftProjectId,
         moduleCode: draftCode,
         surveyId: draftSurveyId,
@@ -161,23 +161,23 @@ const TakeSurveyModal = (props) => {
     const doesDraftExist = useMemo(() => draftProjectId && surveyTitle, [draftProjectId, surveyTitle]);
 
     const {
-        isVisible, 
-        onClose, 
-        editable: isEditable = true, 
+        isVisible,
+        onClose,
+        editable: isEditable = true,
         clone,
         code,
         isNewEdit,
     } = props;
 
     const params = useParams();
-    
+
     const [editMode, setEditMode] = useState(false);
     const editable = useMemo(() => isEditable || editMode, [editMode, isEditable]);
 
     const {
-        questionGroups: allQuestionGroups, 
-        questions, 
-        status, 
+        questionGroups: allQuestionGroups,
+        questions,
+        status,
         answers
     } = useSelector(state => state.question);
 
@@ -227,7 +227,7 @@ const TakeSurveyModal = (props) => {
     }, [activeSurvey, dispatch, moduleCode, isVisible, surveyTitle]);
 
     const [{loading}, createSurvey] = useRequest(
-        `/project/${draftProjectId}/create_survey/`, 
+        `/project/${draftProjectId}/create_survey/`,
         {method: 'POST'}
     );
     const [{loading: addingAnswers}, addSurveyAnswers] = useRequest(
@@ -261,18 +261,18 @@ const TakeSurveyModal = (props) => {
     const [error, setError] = useState(null);
 
     const activeGroup = questionGroups[activeGroupIndex];
-    const activeQuestions = useMemo(() => questions[moduleCode]?.filter(ques => 
+    const activeQuestions = useMemo(() => questions[moduleCode]?.filter(ques =>
         ques.group === activeGroup?.id
     ) || [], [questions, activeGroup, moduleCode]);
 
-    const handlePreviousClick = useCallback(() => 
-        setActiveGroupIndex(activeGroupIndex - 1), 
+    const handlePreviousClick = useCallback(() =>
+        setActiveGroupIndex(activeGroupIndex - 1),
     [activeGroupIndex]
     );
     const handleNextClick = useCallback((scrollTop) => {
-        if(editable && activeQuestions.some(ques => 
-            ques.isRequired && 
-            answers && 
+        if(editable && activeQuestions.some(ques =>
+            ques.isRequired &&
+            answers &&
             !answers?.some(ans => ans.question === ques.id))
         ) {
             if(scrollTop) {
@@ -286,10 +286,10 @@ const TakeSurveyModal = (props) => {
         setActiveGroupIndex(activeGroupIndex + 1);
         contentRef.current.scrollTo({top: 0, behavior: 'smooth'});
     }, [
-        activeGroupIndex, 
-        activeQuestions, 
-        answers, 
-        editable, 
+        activeGroupIndex,
+        activeQuestions,
+        answers,
+        editable,
         dispatch,
         clone,
     ]);
@@ -307,7 +307,7 @@ const TakeSurveyModal = (props) => {
     }, [questions, answers, editable, moduleCode, questionGroups]);
 
     const handleFirstIndex = useCallback(() => setActiveGroupIndex(0), []);
-    const handleLastIndex = useCallback(() => 
+    const handleLastIndex = useCallback(() =>
         setActiveGroupIndex(questionGroups.length),
     [questionGroups]
     );
@@ -371,11 +371,11 @@ const TakeSurveyModal = (props) => {
             console.log(err);
         }
     }, [
-        answers, 
+        answers,
         questions,
         questionGroups,
-        createSurvey, 
-        handleClose, 
+        createSurvey,
+        handleClose,
         dispatch,
         draftProjectId,
         draftSurveyId,
@@ -422,13 +422,13 @@ const TakeSurveyModal = (props) => {
         }
         return 0;
     }, [answeredGroups, activeGroupIndex]);
-    
+
     const touchedGroupIndexes = useMemo(() => {
         return [...Array(maxTouchedGroupIndex + 1).keys()];
     }, [maxTouchedGroupIndex]);
 
     const renderQuestionGroupItem = useCallback(listProps => (
-        <QuestionGroupItem 
+        <QuestionGroupItem
             {...listProps}
             activeGroupId={activeGroup?.id}
             incompleteQuestionGroups={incompleteQuestionGroups}
@@ -440,11 +440,11 @@ const TakeSurveyModal = (props) => {
 
     if(!surveyTitle && editable && moduleCode==='sens') {
         return (
-            <InitSurvey 
+            <InitSurvey
                 clone={clone}
                 questionsStatus={status}
-                isVisible={!surveyTitle} 
-                onClose={onClose} 
+                isVisible={!surveyTitle}
+                onClose={onClose}
             />
         );
     }
@@ -475,11 +475,11 @@ const TakeSurveyModal = (props) => {
                 </div>
             </div>
             <div className={styles.progressContainer}>
-                <div 
-                    className={styles.progress} 
+                <div
+                    className={styles.progress}
                     style={{
                         width: activeGroupIndex / questionGroups.length * 100 + '%',
-                    }} 
+                    }}
                 />
             </div>
             <div className={styles.contentContainer}>
@@ -509,21 +509,21 @@ const TakeSurveyModal = (props) => {
                         <>
                             <div className={styles.contentMessage}>
                                 <div className={styles.contentTextContainer}>
-                                    <img 
-                                        src={isFormIncomplete ? NoSurveyImage : CompletedTaskImage} 
+                                    <img
+                                        src={isFormIncomplete ? NoSurveyImage : CompletedTaskImage}
                                         alt={isFormIncomplete ? _('Task Incomplete')  : _('Task Complete')}
-                                        className={styles.completeImage} 
+                                        className={styles.completeImage}
                                     />
                                     <p className={styles.completeText}>
-                                        {isFormIncomplete 
+                                        {isFormIncomplete
                                             ? _('You have not filled in all the required fields in the form.')
                                             : _('You have now completed all modules and sub-modules that you previously selected in the initial NEAT+ survey page.')
-                                        } 
+                                        }
                                     </p>
                                     <p className={cs(styles.completeText, {
                                         [styles.completeTextWarning]: isFormIncomplete,
                                     })}>
-                                        {isFormIncomplete 
+                                        {isFormIncomplete
                                             ? _('Please go back and complete the form in order to continue.')
                                             : _('Please follow the provided instructions for how to download and analyse this information.')
                                         }
@@ -537,22 +537,22 @@ const TakeSurveyModal = (props) => {
                             )}
                             <div className={styles.buttons}>
                                 <Button
-                                    secondary 
-                                    className={styles.button} 
+                                    secondary
+                                    className={styles.button}
                                     onClick={handlePreviousClick}
                                 >
                                     <BsArrowLeft size={22} className={styles.buttonIconLeft} />
                                     <Localize>Previous</Localize>
                                 </Button>
                                 {editable && (
-                                    <Button 
+                                    <Button
                                         disabled={
-                                            isFormIncomplete 
-                                                || !questionGroups?.length 
+                                            isFormIncomplete
+                                                || !questionGroups?.length
                                                 || !AVAILABLE_SURVEY_MODULES.includes(moduleCode)
                                         }
                                         loading={loading || addingAnswers || addingResults}
-                                        className={cs(styles.button, styles.buttonNext)} 
+                                        className={cs(styles.button, styles.buttonNext)}
                                         onClick={handleValidate}
                                     >
                                         <BsCheck size={22} className={styles.buttonIconLeft} />
@@ -563,9 +563,9 @@ const TakeSurveyModal = (props) => {
                             </div>
                         </>
                     ) : (
-                        <GroupContent 
+                        <GroupContent
                             editable={editable}
-                            activeGroup={activeGroup} 
+                            activeGroup={activeGroup}
                             questions={activeQuestions}
                             onPreviousClick={handlePreviousClick}
                             onNextClick={handleNextClick}
@@ -588,7 +588,7 @@ const TakeSurveyModal = (props) => {
                         <RiSkipForwardLine size={20} className={styles.footerLinkIconRight} />
                     </div>
                 )}
-            </div> 
+            </div>
             <DeleteDraftModal
                 module={moduleCode}
                 isVisible={showDeleteDraftModal}

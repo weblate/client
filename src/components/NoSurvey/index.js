@@ -1,5 +1,5 @@
 import {useMemo} from 'react';
-import {Link} from 'react-router-dom';
+import {Link} from 'react-router';
 import {useSelector} from 'react-redux';
 import hoistNonReactStatics from 'hoist-non-react-statics';
 
@@ -15,7 +15,7 @@ import {_} from 'services/i18n';
 import useInitActiveProject from 'hooks/useInitActiveProject';
 import useSurveyModals from 'hooks/useSurveyModals';
 import {checkEditAccess} from 'utils/permission';
-    
+
 import noSurveyImage from 'assets/images/no-survey.svg';
 
 import styles from './styles.scss';
@@ -37,8 +37,8 @@ const NoSurveys = () => {
                     <img src={noSurveyImage} alt={_('No Surveys')} className={styles.infoImage} />
                     <p className={styles.infoText}><Localize>No surveys have been completed for this project.</Localize></p>
                     {hasEditAccess && (
-                        <Button 
-                            className={styles.button} 
+                        <Button
+                            className={styles.button}
                             onClick={surveyModalsConfig.handleShowDeleteDraft}
                         >
                             <BsPlus size={24} className={styles.buttonIcon} /><Localize>Take Survey</Localize>

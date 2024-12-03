@@ -1,5 +1,5 @@
 import React, {useCallback} from 'react';
-import {useNavigate} from 'react-router-dom';
+import {useNavigate} from 'react-router';
 import {useSelector} from 'react-redux';
 
 import {BsThreeDots} from 'react-icons/bs';

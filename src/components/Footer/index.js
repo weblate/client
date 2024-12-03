@@ -1,5 +1,5 @@
 import {useCallback} from 'react';
-import {Link} from 'react-router-dom';
+import {Link} from 'react-router';
 import {useSelector} from 'react-redux';
 import {FaGithub, FaLinkedin, FaTwitter, FaYoutube} from 'react-icons/fa';
 
@@ -21,7 +21,7 @@ const Footer = () => {
             <Link
                 className={styles.policyLink}
                 to={{
-                    pathname: '/legal-document', 
+                    pathname: '/legal-document',
                 }}
                 state={{title: item?.documentType}}
             >

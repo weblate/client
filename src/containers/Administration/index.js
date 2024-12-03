@@ -1,5 +1,5 @@
 import {useMemo, useState, useCallback, useEffect} from 'react';
-import {useNavigate, Outlet} from 'react-router-dom';
+import {useNavigate, Outlet} from 'react-router';
 import {useSelector} from 'react-redux';
 
 import UserNav from 'components/UserNav';

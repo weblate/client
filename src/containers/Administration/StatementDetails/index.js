@@ -1,5 +1,5 @@
 import { useMemo, useState, useCallback, useEffect } from 'react';
-import { Link, useParams, useNavigate, useOutletContext } from 'react-router-dom';
+import { Link, useParams, useNavigate, useOutletContext } from 'react-router';
 import { useSelector } from 'react-redux';
 import {
     BiRightArrowAlt,

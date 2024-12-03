@@ -1,5 +1,5 @@
 import {useCallback, useState} from 'react';
-import {Link, useNavigate} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router';
 
 import {MdClose} from 'react-icons/md';
 
@@ -17,15 +17,15 @@ import styles from './styles.scss';
 
 const VerifyEmailModal = (props) => {
     const {
-        isVisible, 
-        onClose, 
-        onComplete, 
-        username, 
+        isVisible,
+        onClose,
+        onComplete,
+        username,
         email,
         password,
         mode='confirm',
     } = props;
-    
+
     const navigate = useNavigate();
 
     const [otpData, setOtpData] = useState({otpCode: ''});
@@ -57,7 +57,7 @@ const VerifyEmailModal = (props) => {
             setInfo(_('Successfully resent confirmation mail!'));
         } catch(err) {
             setError(err?.error || _('An error occured while sending email. Please try again!'));
-            console.log(err);    
+            console.log(err);
         }
     }, [resendCode, email, mode, username, password]);
 
@@ -120,9 +120,9 @@ const VerifyEmailModal = (props) => {
                 {!!info && <p className={styles.info}>{info}</p>}
                 {!!error && <p className={styles.error}>{error}</p>}
                 <div className={styles.button}>
-                    <Button 
+                    <Button
                         loading={loadingCode || loadingEmail}
-                        disabled={otpData.otpCode?.length!==6} 
+                        disabled={otpData.otpCode?.length!==6}
                         onClick={handleSubmitCode}
                     >
                         <Localize>Done</Localize>

@@ -1,5 +1,5 @@
 import {useCallback} from 'react';
-import {useNavigate} from 'react-router-dom';
+import {useNavigate} from 'react-router';
 import {useDispatch} from 'react-redux';
 
 import AuthModals from 'components/AuthModals';
@@ -36,7 +36,7 @@ const UpdatePassword = () => {
             }
             if (oldPassword === newPassword) {
                 return Toast.show(
-                    _('New password cannot be same as old password!'), 
+                    _('New password cannot be same as old password!'),
                     Toast.DANGER
                 );
             }

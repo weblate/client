@@ -1,5 +1,5 @@
 import {useCallback} from 'react';
-import {Link} from 'react-router-dom';
+import {Link} from 'react-router';
 
 import Container from 'components/Container';
 
@@ -47,10 +47,10 @@ const WorkSection = () => {
                 <p className={styles.workDesc}>
                     <Localize>A set of humanitarian mitigation measures, together with links to potential development opportunities, allow users to effectively prioritize areas of concern relevant to their organization or operation.</Localize>
                 </p>
-                <Tabs 
-                    defaultActiveTab="step-1" 
+                <Tabs
+                    defaultActiveTab="step-1"
                     headerClassName={styles.workNav}
-                    mode="scroll" 
+                    mode="scroll"
                     renderHeader={renderNavItem}
                 >
                     <Tab label="step-1" title={_('Access the NEAT+')} className={styles.accessContent}>

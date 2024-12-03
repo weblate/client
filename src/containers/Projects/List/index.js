@@ -1,5 +1,5 @@
 import {useState, useCallback, useMemo, useEffect} from 'react';
-import {useNavigate, useOutletContext} from 'react-router-dom';
+import {useNavigate, useOutletContext} from 'react-router';
 import {useSelector} from 'react-redux';
 import {BsPlus} from 'react-icons/bs';
 
@@ -43,10 +43,10 @@ const labelExtractor = item => item.label;
 const ProjectTable = withNoProject(props => {
     const {
         loading,
-        projects, 
-        page, 
-        maxRows, 
-        setPage, 
+        projects,
+        page,
+        maxRows,
+        setPage,
         setMaxRows,
         totalProjects,
         onAction,
@@ -77,7 +77,7 @@ const ProjectTable = withNoProject(props => {
             Header: _('Options'),
             accessor: '',
         }
-    ]), []); 
+    ]), []);
 
     const navigate = useNavigate();
 
@@ -97,7 +97,7 @@ const ProjectTable = withNoProject(props => {
         if(project.surveysCount !== projectSurveys.length) {
             Api.getSurveys({project: project.id});
         }
-        navigate(`/projects/${project.id}/`, {state: {project}}); 
+        navigate(`/projects/${project.id}/`, {state: {project}});
     }, [navigate, surveys]);
 
     const renderDataItem = useCallback(otherProps => (
@@ -106,16 +106,16 @@ const ProjectTable = withNoProject(props => {
 
     return (
         <div className={styles.content}>
-            <Table 
+            <Table
                 controlled
                 loading={loading}
                 LoadingComponent={<NeatLoader medium />}
-                className={styles.table} 
-                data={projects} 
-                columns={columns} 
+                className={styles.table}
+                data={projects}
+                columns={columns}
                 maxRows={maxRows.value}
                 page={page}
-                renderHeaderItem={HeaderItem} 
+                renderHeaderItem={HeaderItem}
                 renderDataItem={renderDataItem}
                 headerClassName={styles.tableHeader}
                 headerRowClassName={styles.headerRow}
@@ -126,12 +126,12 @@ const ProjectTable = withNoProject(props => {
             <div className={styles.contentFooter}>
                 <div className={styles.maxRowsSelect}>
                     <Localize>Show</Localize>
-                    <SelectInput 
+                    <SelectInput
                         className={styles.select}
                         controlClassName={styles.selectControl}
-                        options={maxRowsOptions} 
-                        keyExtractor={keyExtractor} 
-                        valueExtractor={labelExtractor} 
+                        options={maxRowsOptions}
+                        keyExtractor={keyExtractor}
+                        valueExtractor={labelExtractor}
                         onChange={handleMaxRowsChange}
                         value={maxRows}
                         defaultValue={maxRowsOptions[0]}
@@ -141,14 +141,14 @@ const ProjectTable = withNoProject(props => {
                     />
                     <Localize>Rows</Localize>
                 </div>
-                <Pagination 
+                <Pagination
                     className={styles.pagination}
                     pageItemClassName={styles.paginationItem}
                     activePageItemClassName={styles.paginationItemActive}
-                    onChange={handlePageChange} 
+                    onChange={handlePageChange}
                     totalRecords={totalProjects}
                     pageNeighbours={1}
-                    pageLimit={maxRows.value} 
+                    pageLimit={maxRows.value}
                     pageNum={page}
                 />
             </div>
@@ -218,11 +218,11 @@ const ProjectList = () => {
     const fetchProjects = useCallback(() => {
         getProjects({
             tab,
-            limit: maxRows.value, 
+            limit: maxRows.value,
             offset: (page - 1) * maxRows.value,
             search: projectSearchQuery
         });
-    }, [getProjects, page, maxRows, tab, projectSearchQuery]); 
+    }, [getProjects, page, maxRows, tab, projectSearchQuery]);
 
     useEffect(() => {
         fetchProjects();
@@ -254,9 +254,9 @@ const ProjectList = () => {
     ), []);
 
     const renderCreateButton = useCallback(() => (
-        <Button 
-            outline 
-            className={styles.button} 
+        <Button
+            outline
+            className={styles.button}
             onClick={handleShowCreateModal}
         >
             <BsPlus size={24} className={styles.buttonIcon} /> <Localize>Create</Localize>
@@ -265,7 +265,7 @@ const ProjectList = () => {
 
     return (
         <div className={styles.container}>
-            <Tabs 
+            <Tabs
                 activeTab={tab}
                 secondary
                 PreHeaderComponent={renderTitle}
@@ -276,16 +276,16 @@ const ProjectList = () => {
                 onChange={handleTabChange}
             >
                 {tabs.map(tabItem => (
-                    <Tab 
-                        key={tabItem.label} 
-                        label={tabItem.label} 
+                    <Tab
+                        key={tabItem.label}
+                        label={tabItem.label}
                         title={tabItem.title}
                     >
-                        <ProjectTable 
+                        <ProjectTable
                             loading={loading}
-                            page={page} 
-                            maxRows={maxRows} 
-                            projects={projects} 
+                            page={page}
+                            maxRows={maxRows}
+                            projects={projects}
                             setPage={setPage}
                             setMaxRows={setMaxRows}
                             totalProjects={totalProjects}

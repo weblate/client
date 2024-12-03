@@ -1,5 +1,5 @@
 import {useCallback, useState, useMemo} from 'react';
-import {Link, useNavigate} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router';
 import {BsEyeFill, BsEyeSlashFill} from 'react-icons/bs';
 
 import useRequest from 'hooks/useRequest';
@@ -122,9 +122,9 @@ const Login = () => {
                                     <Localize>Forgot Password?</Localize>
                                 </Link>
                                 {!!error && (
-                                    <Link 
-                                        className={styles.linkItem} 
-                                        to="#" 
+                                    <Link
+                                        className={styles.linkItem}
+                                        to="#"
                                         onClick={authModalsConfig.handleShowVerifyEmail}
                                     >
                                         <Localize>Activate account?</Localize>
@@ -142,7 +142,7 @@ const Login = () => {
                             <Link
                                 className={styles.link}
                                 to={{
-                                    pathname: '/legal-document', 
+                                    pathname: '/legal-document',
                                 }}
                                 state={{title: 'privacy-policy'}}
                             >
@@ -151,7 +151,7 @@ const Login = () => {
                             <Link
                                 className={styles.link}
                                 to={{
-                                    pathname: '/legal-document', 
+                                    pathname: '/legal-document',
                                 }}
                             >
                                 <Localize>Terms of Use</Localize>
@@ -159,9 +159,9 @@ const Login = () => {
                         </div>
                     </main>
                 </div>
-                <AuthModals 
-                    username={email} 
-                    onRegisterComplete={authModalsConfig.hideModals} 
+                <AuthModals
+                    username={email}
+                    onRegisterComplete={authModalsConfig.hideModals}
                     {...authModalsConfig}
                 />
             </Container>
