@@ -1,10 +1,10 @@
 import {useCallback, useRef, useState, useMemo} from 'react';
-import {Link, useNavigate, useMatch, useParams} from 'react-router-dom';
+import {Link, useNavigate, useMatch, useParams} from 'react-router';
 import {useSelector, useDispatch} from 'react-redux';
 
 import {
-    IoNotificationsOutline, 
-    IoSettingsOutline, 
+    IoNotificationsOutline,
+    IoSettingsOutline,
 } from 'react-icons/io5';
 import {IoMdLogOut} from 'react-icons/io';
 import {MdOutlineAdminPanelSettings, MdOutlineListAlt} from 'react-icons/md';
@@ -138,10 +138,10 @@ const UserNav = ({searchQuery, onSearchQueryChange}) => {
             <div className={styles.rightSpacer} />
             <div className={cs(styles.rightContent, 'no-print')}>
                 {isSurveyPath && (
-                    <Dropdown 
+                    <Dropdown
                         className={styles.shareDropdown}
-                        labelContainerClassName={styles.shareIconContainer} 
-                        align="right" 
+                        labelContainerClassName={styles.shareIconContainer}
+                        align="right"
                         renderLabel={renderShareLabel}
                         useCapture={false}
                     >
@@ -191,9 +191,9 @@ const UserNav = ({searchQuery, onSearchQueryChange}) => {
                             </Link>
                         )}
                         <Link to='/organizations' className={styles.userOption}>
-                            <img 
-                                src={OrganizationIcon} 
-                                className={styles.userIcon} 
+                            <img
+                                src={OrganizationIcon}
+                                className={styles.userIcon}
                                 alt="organization"
                             />
                             <Localize>Organizations</Localize>

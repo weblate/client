@@ -1,5 +1,5 @@
 import {useCallback, useMemo} from 'react';
-import {useSearchParams} from 'react-router-dom';
+import {useSearchParams} from 'react-router';
 import {useSelector} from 'react-redux';
 
 import Tabs, {Tab} from 'components/Tabs';
@@ -67,9 +67,9 @@ const SurveyTabs = props => {
     }, []);
 
     return (
-        <Tabs 
+        <Tabs
             activeTab={activeTab}
-            secondary 
+            secondary
             className={styles.tabs}
             PreHeaderComponent={renderSpacer}
             PostHeaderComponent={renderHeaderControls}

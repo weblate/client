@@ -1,13 +1,13 @@
 import {useCallback, useState, useMemo} from 'react';
-import {useParams} from 'react-router-dom';
+import {useParams} from 'react-router';
 import {useSelector} from 'react-redux';
 
 import {initDraftAnswers} from 'utils/dispatch';
 import Api from 'services/api';
 
 const useSurveyModals = (module, surveyId) => {
-    const {projectId} = useParams(); 
-    
+    const {projectId} = useParams();
+
     const {projectId: draftId, title} = useSelector(state => state.draft);
     const {questions} = useSelector(state => state.question);
 

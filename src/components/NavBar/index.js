@@ -1,4 +1,4 @@
-import {NavLink, Link} from 'react-router-dom';
+import {NavLink, Link} from 'react-router';
 import {useSelector} from 'react-redux';
 
 import Container from 'components/Container';

@@ -1,5 +1,5 @@
 import {useState, useCallback, useMemo} from 'react';
-import {Link, useSearchParams} from 'react-router-dom';
+import {Link, useSearchParams} from 'react-router';
 import {useSelector, useDispatch} from 'react-redux';
 import {BiChevronLeft, BiEditAlt} from 'react-icons/bi';
 import {BsArrowCounterclockwise} from 'react-icons/bs';
@@ -35,7 +35,7 @@ const IssuesBox = ({showIssues, onClose}) => {
     const dispatch = useDispatch();
 
     const {
-        statementTagGroups, 
+        statementTagGroups,
         statementTags
     } = useSelector(state => state.statement);
     const {filters} = useSelector(state => state.dashboard);
@@ -50,7 +50,7 @@ const IssuesBox = ({showIssues, onClose}) => {
             setSelectedIssues(selectedIssues.filter(el => el !== issueId));
         }
     }, [selectedIssues]);
-    
+
     const handleApplyFilter = useCallback(() => {
         dispatch(setFilters(selectedIssues));
         onClose && onClose();
@@ -65,8 +65,8 @@ const IssuesBox = ({showIssues, onClose}) => {
                     checked={selectedIssues.some(el => item.id===el)}
                     onChange={handleChangeIssue}
                     size={18}
-                    id={issueId} 
-                    className={styles.checkbox} 
+                    id={issueId}
+                    className={styles.checkbox}
                 />
                 <label htmlFor={issueId}>{item.title}</label>
             </div>
@@ -75,8 +75,8 @@ const IssuesBox = ({showIssues, onClose}) => {
 
     // TODO: Handle multiple tag groups
     const tagGroup = useMemo(() => statementTagGroups[0], [statementTagGroups]);
-    const tags = useMemo(() => 
-        statementTags?.filter(el => tagGroup && el.group === tagGroup?.id) || [], 
+    const tags = useMemo(() =>
+        statementTags?.filter(el => tagGroup && el.group === tagGroup?.id) || [],
     [statementTags, tagGroup]);
 
     const handleToggleAll = useCallback(() => {
@@ -125,7 +125,7 @@ const SurveyDashboard = () => {
     useInitActiveSurvey();
 
     const {
-        isEditMode, 
+        isEditMode,
         itemsToRemove,
         removedItems,
         filters,
@@ -162,8 +162,8 @@ const SurveyDashboard = () => {
         return tabParam;
     }, [searchParams]);
 
-    const toggleRestoreModal = useCallback(() => 
-        setShowRestoreModal(!showRestoreModal), 
+    const toggleRestoreModal = useCallback(() =>
+        setShowRestoreModal(!showRestoreModal),
     [showRestoreModal]);
 
     const toggleIssues = useCallback(() =>
@@ -196,8 +196,8 @@ const SurveyDashboard = () => {
         if(isEditMode) {
             return (
                 <div className={cs(styles.headerControls, 'no-print')}>
-                    <Button 
-                        className={styles.controlButton} 
+                    <Button
+                        className={styles.controlButton}
                         onClick={toggleRestoreModal}
                     >
                         <BsArrowCounterclockwise size={20} className={styles.controlIcon} />
@@ -221,10 +221,10 @@ const SurveyDashboard = () => {
                     <BiEditAlt size={20} className={styles.controlIcon} />
                     <Localize>Edit Report</Localize>
                 </Button>
-                <Button 
+                <Button
                     className={cs(styles.controlButton, {
                         [styles.controlButtonActive]: filters?.length
-                    })} 
+                    })}
                     onClick={toggleIssues}
                 >
                     {filters?.length ? (
@@ -245,10 +245,10 @@ const SurveyDashboard = () => {
             </div>
         );
     }, [
-        activeTab, 
-        activateEditMode, 
-        toggleRestoreModal, 
-        isEditMode, 
+        activeTab,
+        activateEditMode,
+        toggleRestoreModal,
+        isEditMode,
         handleSaveClick,
         itemsToRemove,
         showIssues,
@@ -269,28 +269,28 @@ const SurveyDashboard = () => {
                     <Localize>Close Edit Mode</Localize>
                 </div>
             ) : activeProject ? (
-                <Link 
-                    to={`/projects/${activeProject.id}/surveys/`} 
+                <Link
+                    to={`/projects/${activeProject.id}/surveys/`}
                     className={cs(styles.backLink, 'no-print')}
                 >
-                    <BiChevronLeft 
-                        size={22} 
-                        className={styles.backIcon} 
+                    <BiChevronLeft
+                        size={22}
+                        className={styles.backIcon}
                     /> <Localize>Back to Surveys</Localize>
                 </Link>
             ) : null}
-            <SurveyTabs 
-                activeTab={activeTab} 
-                onTabChange={handleTabChange} 
+            <SurveyTabs
+                activeTab={activeTab}
+                onTabChange={handleTabChange}
                 renderHeaderControls={renderHeaderControls}
             />
-            <RestoreItemsModal 
+            <RestoreItemsModal
                 module={activeTab === 'sensitivity' ? 'sens' : activeTab}
-                isVisible={showRestoreModal} 
+                isVisible={showRestoreModal}
                 onClose={toggleRestoreModal}
             />
         </div>
-    ); 
+    );
 };
 
 export default SurveyDashboard;

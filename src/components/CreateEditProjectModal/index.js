@@ -1,5 +1,5 @@
 import React, {useCallback, useEffect, useState, useMemo} from 'react';
-import {useNavigate} from 'react-router-dom';
+import {useNavigate} from 'react-router';
 import {useSelector} from 'react-redux';
 import {MdClose} from 'react-icons/md';
 
@@ -123,7 +123,7 @@ const CreateEditProjectModal = (props) => {
                 return setError(
                     new Error(_('Visibility cannot be \'Public within organization\' with no organization selected'))
                 );
-            } 
+            }
             const body = {
                 title,
                 organization: organization?.id,
@@ -166,12 +166,12 @@ const CreateEditProjectModal = (props) => {
             setLoading(false);
         },
         [
-            visibility, 
-            createOrEditProject, 
-            onClose, 
-            navigate, 
-            mode, 
-            initialUsers, 
+            visibility,
+            createOrEditProject,
+            onClose,
+            navigate,
+            mode,
+            initialUsers,
             project?.id,
             contexts,
             onComplete

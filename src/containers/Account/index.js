@@ -1,5 +1,5 @@
 import {useCallback, useState} from 'react';
-import {useNavigate} from 'react-router-dom';
+import {useNavigate} from 'react-router';
 
 import {IoIosArrowBack} from 'react-icons/io';
 import {BiUser} from 'react-icons/bi';
@@ -36,16 +36,16 @@ const Account = () => {
                 </div>
                 <div className={styles.mainSection}>
                     <div className={styles.panels}>
-                        <div 
-                            onClick={handleAccountClick} 
+                        <div
+                            onClick={handleAccountClick}
                             className={cs(styles.panelItem, {
                                 [styles.panelItemActive]: route==='account',
                             })}>
                             <BiUser size="20px" className={styles.panelIcon} />
                             <span><Localize>Account</Localize></span>
                         </div>
-                        <div 
-                            onClick={handlePasswordClick} 
+                        <div
+                            onClick={handlePasswordClick}
                             className={cs(styles.panelItem, {
                                 [styles.panelItemActive]: route==='password',
                             })}>

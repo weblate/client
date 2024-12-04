@@ -1,5 +1,5 @@
 import {useState, useCallback} from 'react';
-import {useNavigate} from 'react-router-dom';
+import {useNavigate} from 'react-router';
 import {useSelector} from 'react-redux';
 
 import {BiChevronLeft} from 'react-icons/bi';
@@ -59,9 +59,9 @@ const Organizations = () => {
                         <Localize>My Organizations</Localize>
                     </h1>
                     {!!myOrganizations.length && (
-                        <Button 
-                            outline 
-                            onClick={handleShowJoinModal} 
+                        <Button
+                            outline
+                            onClick={handleShowJoinModal}
                             className={styles.button}
                         >
                             <BsPlus size={24} className={styles.buttonIcon} />

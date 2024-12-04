@@ -1,6 +1,3 @@
-#!/usr/bin/env sh
-. "$(dirname -- "$0")/_/husky.sh"
-
 yarn lint-staged
 yarn generate:po
 cp -f src/po/locale_fr.po src/po/locale_es.po

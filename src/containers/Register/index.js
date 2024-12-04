@@ -1,5 +1,5 @@
 import {useState, useCallback} from 'react';
-import {Link, useNavigate} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router';
 import {GoogleReCaptchaProvider, GoogleReCaptcha} from 'react-google-recaptcha-v3';
 
 import Container from 'components/Container';
@@ -21,7 +21,7 @@ import styles from './styles.scss';
 const Register = () => {
     const navigate = useNavigate();
     const authModalsConfig = useAuthModals();
-    
+
     const [acceptTerms, setAcceptTerms] = useState(false);
     const [error, setError] = useState(null);
     const [loginData, setLoginData] = useState({
@@ -29,21 +29,21 @@ const Register = () => {
         password: '',
     });
     const [recaptchaToken, setRecaptchaToken] = useState(null);
-    
+
     const [{loading}, registerUser] = useRequest('/user/register/', {method: 'POST'});
     const [, loginUser] = useRequest('/jwt/create/', {method: 'POST'});
 
     const handleCheck = useCallback(({checked}) => setAcceptTerms(checked), []);
-    
+
     const handleRegister = useCallback(async (formData) => {
         setError(null);
 
         const {
-            fullName, 
-            username, 
-            email, 
-            password, 
-            organization, 
+            fullName,
+            username,
+            email,
+            password,
+            organization,
             role,
         } = formData;
 
@@ -121,7 +121,7 @@ const Register = () => {
                                     <Link
                                         className={styles.link}
                                         to={{
-                                            pathname: '/legal-document', 
+                                            pathname: '/legal-document',
                                         }}
                                         state={{title: 'privacy-policy'}}
                                     >
@@ -130,17 +130,17 @@ const Register = () => {
                                     <Link
                                         className={styles.link}
                                         to={{
-                                            pathname: '/legal-document', 
+                                            pathname: '/legal-document',
                                         }}
                                     >
                                         <Localize>Terms of Use</Localize>
                                     </Link>
                                 </div>
                             </div>
-                            <Form 
+                            <Form
                                 error={error}
                                 formErrorClassName={styles.error}
-                                onSubmit={handleRegister} 
+                                onSubmit={handleRegister}
                                 className={styles.form}
                             >
                                 <h2 className={styles.formHeader}><Localize>Create your account</Localize></h2>
@@ -208,16 +208,16 @@ const Register = () => {
                                         <Link
                                             className={styles.termsInputLabelLink}
                                             to={{
-                                                pathname: '/legal-document', 
+                                                pathname: '/legal-document',
                                             }}
                                         >
                                             <Localize>Terms of Use</Localize>
                                         </Link>
-                                        <Localize>and</Localize> 
+                                        <Localize>and</Localize>
                                         <Link
                                             className={styles.termsInputLabelLink}
                                             to={{
-                                                pathname: '/legal-document', 
+                                                pathname: '/legal-document',
                                             }}
                                             state={{title: 'privacy-policy'}}
                                         >

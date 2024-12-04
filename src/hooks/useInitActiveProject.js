@@ -1,5 +1,5 @@
 import {useEffect, useCallback, useMemo} from 'react';
-import {useParams, useLocation} from 'react-router-dom';
+import {useParams, useLocation} from 'react-router';
 import {useDispatch, useSelector} from 'react-redux';
 
 import usePromise from '@ra/hooks/usePromise';
@@ -35,7 +35,7 @@ const useInitActiveProject = (id) => {
     useEffect(() => {
         if(accessData && activeProject && activeProject?.accessLevel !== accessData?.accessLevel) {
             const newActiveProject = {
-                ...activeProject, 
+                ...activeProject,
                 accessLevel: accessData.accessLevel
             };
             dispatch(setActiveProject(newActiveProject));
@@ -68,7 +68,7 @@ const useInitActiveProject = (id) => {
         }
     }, [activeProject, projectId, addActiveProject]);
 
-    const hasSurveys = useMemo(() => surveys.some(el => el.project === +projectId), [surveys, projectId]); 
+    const hasSurveys = useMemo(() => surveys.some(el => el.project === +projectId), [surveys, projectId]);
 
     const hasResults = useMemo(() => surveyResults?.length && !surveys.some(sur => {
         return surveyResults.some(res => res.survey !== sur.id);

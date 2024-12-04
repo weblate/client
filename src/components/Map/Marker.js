@@ -2,6 +2,7 @@ const pinStyle = {
     cursor: 'pointer',
     fill: '#00a297',
     stroke: 'none',
+    position: 'absolute'
 };
 
 const MarkerPin = () => {

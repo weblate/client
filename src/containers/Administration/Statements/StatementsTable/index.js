@@ -1,5 +1,5 @@
 import {useMemo, useCallback, useState, useEffect} from 'react';
-import {useNavigate} from 'react-router-dom';
+import {useNavigate} from 'react-router';
 import {useSelector} from 'react-redux';
 
 import {NeatLoader} from 'components/Loader';
@@ -95,7 +95,7 @@ const StatementsTable = props => {
             Header: _('Okay / Need correction'),
             accessor: '',
         }
-    ]), []); 
+    ]), []);
 
     useEffect(() => {
         if(activeModule?.id) {
@@ -169,11 +169,11 @@ const StatementsTable = props => {
                     />
                     <Localize>Rows</Localize>
                 </div>
-                <Pagination 
+                <Pagination
                     className={styles.pagination}
                     pageItemClassName={styles.paginationItem}
                     activePageItemClassName={styles.paginationItemActive}
-                    onChange={handlePageChange} 
+                    onChange={handlePageChange}
                     totalRecords={totalStatements}
                     pageNeighbours={1}
                     pageLimit={maxRows.value}

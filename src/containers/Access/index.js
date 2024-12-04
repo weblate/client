@@ -1,5 +1,5 @@
 import {useEffect} from 'react';
-import {Link} from 'react-router-dom';
+import {Link} from 'react-router';
 import {BsArrowRight} from 'react-icons/bs';
 
 import Container from 'components/Container';
@@ -42,7 +42,7 @@ const NeatCard = ({title, description, image, fileImage, buttonTitle, toDashboar
                         {buttonTitle}<BsArrowRight className={styles.buttonIcon} />
                     </Button>
                 </a>
-            )} 
+            )}
             <img className={styles.fileImage} src={fileImage} alt="file-icon" />
         </div>
     );

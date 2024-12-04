@@ -1,4 +1,4 @@
-import {Link} from 'react-router-dom';
+import {Link} from 'react-router';
 import {BsArrowRight} from 'react-icons/bs';
 
 import Container from 'components/Container';
