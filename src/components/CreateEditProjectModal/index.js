@@ -149,14 +149,14 @@ const CreateEditProjectModal = (props) => {
                 }
                 if (result && mode === 'create') {
                     Toast.show(_('Project successfully Created!'), Toast.SUCCESS);
-                    onComplete();
-                    onClose();
+                    onComplete && onComplete();
+                    onClose && onClose();
                     navigate(`/projects/${result.id}/`);
                 }
 
                 if (result && mode === 'edit') {
-                    onComplete();
-                    onClose();
+                    onComplete && onComplete();
+                    onClose && onClose();
                     Toast.show(_('Project successfully Edited!'), Toast.SUCCESS);
                 }
             } catch (err) {
