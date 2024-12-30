@@ -117,6 +117,7 @@ const Question = forwardRef((props, ref) => {
                     [styles.inputTitle]: item.answerType!=='description',
                 })}>
                     {item.title}
+                    {item.isRequired && <span className={styles.required} title={_('Required')}>*</span>}
                 </p>
                 {!!item.hints && (
                     <p className={styles.contentHint}>{item.hints}</p>
