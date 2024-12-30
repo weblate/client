@@ -83,6 +83,11 @@
             color: var(--color-grey-light-alt);
         }
     }
+
+    .required {
+        color: var(--color-danger);
+        font-size: var(--font-size-normal);
+    }
 }
 
 .required-text {
