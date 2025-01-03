@@ -29,6 +29,7 @@ import {calculateSurveyResults} from 'utils/calculation';
 import {initDraftAnswers} from 'utils/dispatch';
 import {AVAILABLE_SURVEY_MODULES} from 'utils/config';
 import {parseSkipLogic} from 'utils/skipLogic';
+import {formatTime} from 'utils/time';
 
 import Api from 'services/api';
 import Toast from 'services/toast';
@@ -452,9 +453,14 @@ const TakeSurveyModal = (props) => {
     return (
         <Modal className={styles.modal}>
             <div className={styles.header}>
-                <h2 className={styles.title}>
-                    {editable ? surveyTitle : activeSurvey?.title}
-                </h2>
+                <div>
+                    <h2 className={styles.title}>
+                        {editable ? surveyTitle : activeSurvey?.title}
+                    </h2>
+                    <h3 className={styles.subTitle}>
+                        {questions[moduleCode]?.length} Questions | Estimated Time: {formatTime(activeModule?.questionCompletionTime)}
+                    </h3>
+                </div>
                 <div className={styles.headerRight}>
                     {isNewEdit && (
                         <>
