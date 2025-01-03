@@ -428,6 +428,14 @@ const TakeSurveyModal = (props) => {
         return [...Array(maxTouchedGroupIndex + 1).keys()];
     }, [maxTouchedGroupIndex]);
 
+    const totalQuestions = useMemo(() => {
+        return questions[moduleCode]?.filter((question) => question.answerType !== 'description').length;
+    }, [questions, moduleCode]);
+
+    const estimatedTime = useMemo(() => {
+        return formatTime(activeModule?.questionCompletionTime);
+    }, [activeModule]);
+
     const renderQuestionGroupItem = useCallback(listProps => (
         <QuestionGroupItem
             {...listProps}
@@ -458,7 +466,7 @@ const TakeSurveyModal = (props) => {
                         {editable ? surveyTitle : activeSurvey?.title}
                     </h2>
                     <h3 className={styles.subTitle}>
-                        {questions[moduleCode]?.length} Questions | Estimated Time: {formatTime(activeModule?.questionCompletionTime)}
+                        {totalQuestions} Questions | Estimated Time: {estimatedTime}
                     </h3>
                 </div>
                 <div className={styles.headerRight}>
